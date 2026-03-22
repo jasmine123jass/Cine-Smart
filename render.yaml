@@ -1,0 +1,21 @@
+services:
+  # Backend API Service
+  - name: cinesmart-backend
+    type: container
+    dockerfilePath: backend/Dockerfile
+    dockerContext: .
+    region: oregon
+    envVars:
+      - key: PORT
+        value: 9090
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+
+  # Frontend Static Site
+  - name: cinesmart-frontend
+    type: static
+    buildCommand: ""
+    outputDir: Frontend
+    routes:
+      - path: /**
+        single: index.html
